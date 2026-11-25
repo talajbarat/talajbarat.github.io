@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Szada–Veresegyház Talajbarát Vízgyűjtő-Diagnosztika</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23C85A35'/><path d='M16 5C16 5 9 14 9 19.5a7 7 0 0 0 14 0C23 14 16 5 16 5z' fill='%23FFF8EE'/></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a href="#map" class="skip-link">Ugrás a térképre</a>
+
+  <!-- Full-bleed Leaflet canvas -->
+  <div id="map" class="map-canvas" tabindex="-1" aria-label="Interaktív talajbarát vízgyűjtő-térkép"></div>
+
+  <!-- Top-left floating brand card -->
+  <header class="brand-card" role="banner">
+    <div class="brand-title-wrap">
+      <span class="brand-dot" aria-hidden="true"></span>
+      <div class="brand-text">
+        <h1 class="brand-title">Szada – Veresegyház</h1>
+        <span class="brand-sub">Talajbarát vízgyűjtő · prototípus</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Floating thematic layer dropdown button -->
+  <nav class="view-dropdown" aria-label="Tematikus rétegek">
+    <button type="button" id="view-menu-btn" class="floating-pill view-menu-btn" popovertarget="view-popover">
+      <span class="view-menu-prefix">Réteg:</span>
+      <span id="view-menu-label">Vízgyűjtő</span>
+      <span class="view-menu-caret" aria-hidden="true">▾</span>
+    </button>
+    <div id="view-popover" popover="auto" class="floating-card view-popover" aria-label="Tematikus réteg választó">
+      <button type="button" class="view-option is-active" data-view="hydro" aria-pressed="true">Vízgyűjtő</button>
+      <button type="button" class="view-option" data-view="sealing" aria-pressed="false">Talajfedés</button>
+      <button type="button" class="view-option" data-view="erosion" aria-pressed="false">Erózió</button>
+      <button type="button" class="view-option" data-view="heat" aria-pressed="false">Hősziget</button>
+    </div>
+  </nav>
+
+  <!-- Collapsible left floating sidebar (mobile bottom sheet) -->
+  <aside id="side-panel" class="side-panel floating-card" data-state="open" data-sheet="peek" aria-label="Aktív réteg összefoglalója">
+    <button type="button" id="sheet-handle" class="sheet-handle" aria-expanded="false">
+      <span class="sheet-grip" aria-hidden="true"></span>
+      <span class="sheet-handle-text" id="sheet-handle-text">Réteg összefoglaló</span>
+    </button>
+
+    <div class="panel-scroll scroll-pane" id="panel-scroll">
+      <div id="overview-view" class="overview-view">
+        <div class="panel-header">
+          <h2 class="panel-title" id="view-heading">Vízgyűjtő és vízvisszatartás</h2>
+          <p class="panel-lead" id="view-lead"></p>
+
+          <dl class="panel-kpis" id="panel-kpis" aria-label="Kiemelt mutatók">
+            <!-- Populated dynamically per active view -->
+          </dl>
+        </div>
+
+        <section class="muni-band" id="muni-band" aria-label="Szada és Veresegyház összehasonlítása">
+          <!-- Populated dynamically per active view -->
+        </section>
+
+        <section class="method-section" id="method-section" aria-label="Hogyan készült ez a réteg?">
+          <!-- Populated dynamically per active view -->
+        </section>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Edge tab to collapse/expand the floating sidebar on desktop -->
+  <button type="button" id="panel-toggle" class="panel-toggle" aria-controls="side-panel" aria-expanded="true" aria-label="Panel elrejtése" title="Panel elrejtése">
+    <span class="panel-toggle-chevron" aria-hidden="true"></span>
+  </button>
+
+  <!-- Bottom-right Layers & Legend popover trigger -->
+  <div class="map-controls-br">
+    <button type="button" class="floating-pill" id="layers-toggle" popovertarget="layers-popover">
+      Rétegek
+    </button>
+  </div>
+
+  <!-- Anchored manual popover: stays open while panning/zooming the map -->
+  <div id="layers-popover" popover="manual" class="floating-card layers-popover" aria-label="Alaptérkép, segédrétegek és jelmagyarázat">
+    <div class="popover-head">
+      <h2 class="popover-title">Alaptérkép</h2>
+      <button type="button" class="popover-close" popovertarget="layers-popover" popovertargetaction="hide" aria-label="Rétegek panel bezárása" title="Bezárás">
+        ✕
+      </button>
+    </div>
+    <div class="basemap-switch" role="group" aria-label="Alaptérkép választó">
+      <button type="button" class="basemap-btn is-active" data-basemap="sat_fresh" aria-pressed="true">Műhold</button>
+      <button type="button" class="basemap-btn" data-basemap="osm" aria-pressed="false">OSM</button>
+    </div>
+
+    <div class="opacity-block">
+      <div class="opacity-row">
+        <label for="raster-opacity" class="popover-title-inline">Raszter áttetszősége</label>
+        <span class="mono-val" id="opacity-value">80%</span>
+      </div>
+      <input type="range" id="raster-opacity" min="20" max="100" step="5" value="80" aria-valuetext="80%">
+    </div>
+
+    <h2 class="popover-title">Kiegészítő rétegek</h2>
+    <div class="layer-toggles">
+      <label class="layer-check">
+        <span>Településhatárok</span>
+        <input type="checkbox" id="toggle-aoi" checked>
+      </label>
+      <label class="layer-check">
+        <span>Befogadó tavak &amp; védett zónák</span>
+        <input type="checkbox" id="toggle-eco">
+      </label>
+    </div>
+
+    <h2 class="popover-title">Jelmagyarázat</h2>
+    <div id="popover-legend" class="legend-list">
+      <!-- Populated dynamically for the active view only -->
+    </div>
+
+    <p class="popover-attrib">
+      Források: lokális 10 m DEM, Copernicus Sentinel-2, Landsat 8/9, NÖSZTÉP, OSM, Esri.
+    </p>
+  </div>
+
+  <script type="module">
+    if (!Object.hasOwn(HTMLElement.prototype, "popover")) {
+      import("https://unpkg.com/@oddbird/popover-polyfill@latest/dist/popover.min.js").catch(() => {});
+    }
+  </script>
+  <script src="vendor/leaflet/leaflet.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+{
+  "municipalities": {
+    "Szada": {
+      "name": "Szada",
+      "area_ha": 1665.2,
+      "area_km2": 16.65,
+      "pop_2023": 6364,
+      "pop_density_km2": 382.2,
+      "elev_min_m": 169.1,
+      "elev_mean_m": 221.8,
+      "elev_max_m": 345.2,
+      "sealed_2018_ha": 229.8,
+      "sealed_2018_pct": 13.8,
+      "sealed_2025_ha": 300.6,
+      "sealed_2025_pct": 18.1,
+      "new_sealing_2018_2025_ha": 70.7,
+      "sealing_rel_growth_pct": 30.8,
+      "lst_mean_c": 38.6,
+      "lst_sealed_c": 40.6,
+      "lst_green_c": 34.6,
+      "uhi_contrast_c": 6.0,
+      "erosion_high_ha": 26.7,
+      "mean_cn_2025": 55.8,
+      "runoff_50mm_m3": 160537,
+      "runoff_50mm_mean_mm": 9.6,
+      "excess_50mm_m3": 135025,
+      "excess_50mm_pools": 54.0,
+      "runoff_80mm_m3": 317688,
+      "excess_80mm_m3": 274983
+    },
+    "Veresegyház": {
+      "name": "Veresegyház",
+      "area_ha": 2849.6,
+      "area_km2": 28.5,
+      "pop_2023": 20857,
+      "pop_density_km2": 731.9,
+      "elev_min_m": 149.2,
+      "elev_mean_m": 199.5,
+      "elev_max_m": 344.3,
+      "sealed_2018_ha": 607.8,
+      "sealed_2018_pct": 21.3,
+      "sealed_2025_ha": 692.0,
+      "sealed_2025_pct": 24.3,
+      "new_sealing_2018_2025_ha": 84.1,
+      "sealing_rel_growth_pct": 13.8,
+      "lst_mean_c": 37.4,
+      "lst_sealed_c": 40.7,
+      "lst_green_c": 34.1,
+      "uhi_contrast_c": 6.6,
+      "erosion_high_ha": 16.9,
+      "mean_cn_2025": 56.8,
+      "runoff_50mm_m3": 350656,
+      "runoff_50mm_mean_mm": 12.3,
+      "excess_50mm_m3": 320807,
+      "excess_50mm_pools": 128.3,
+      "runoff_80mm_m3": 652144,
+      "excess_80mm_m3": 602128
+    }
+  },
+  "combined": {
+    "area_ha": 4514.8,
+    "pop_2023": 27221,
+    "sealed_2018_ha": 837.6,
+    "sealed_2018_pct": 18.6,
+    "sealed_2025_ha": 992.6,
+    "sealed_2025_pct": 22.0,
+    "new_sealing_2018_2025_ha": 154.8,
+    "uhi_contrast_c": 6.4,
+    "lst_sealed_c": 40.7,
+    "lst_green_c": 34.3,
+    "erosion_high_ha": 43.6,
+    "runoff_50mm_m3": 511193,
+    "excess_50mm_m3": 455832,
+    "excess_50mm_pools": 182.3,
+    "runoff_80mm_m3": 969832,
+    "excess_80mm_m3": 877111
+  },
+  "cross_border": {
+    "node_count": 6,
+    "total_catchment_ha": 1582.0,
+    "szada_catchment_ha": 1122.4,
+    "runoff_50mm_m3": 143366,
+    "excess_50mm_m3": 117699,
+    "runoff_80mm_m3": 280991
+  },
+  "hotspots": {
+    "retention_count": 10,
+    "rain_garden_count": 6,
+    "check_dam_count": 4,
+    "pollution_count": 8,
+    "receiving_ecosystems_count": 109
+  },
+  "calibration": {
+    "ndvi_thresh": 0.42,
+    "ndbi_thresh": -0.18,
+    "f1_vs_nostep2019": 0.575
+  },
+  "omsz_budapest_1901_2019": {
+    "days_ge_40mm": 61,
+    "days_ge_50mm": 21,
+    "days_ge_40mm_since_1990": 20,
+    "max_daily_mm": 115.4
+  },
+  "derived_indices": {
+    "thresholds": {
+      "twi_p75": 8.43,
+      "twi_p80": 8.72,
+      "twi_p96": 11.1,
+      "spi_p82": 2.83
+    },
+    "hydro": {
+      "sink_area_ha": 12.6,
+      "sink_volume_m3": 53465,
+      "high_twi_ha": 852.7,
+      "szada": {
+        "sink_area_ha": 2.1,
+        "sink_volume_m3": 8720,
+        "high_twi_ha": 298.3
+      },
+      "veresegyhaz": {
+        "sink_area_ha": 10.5,
+        "sink_volume_m3": 44745,
+        "high_twi_ha": 554.4
+      }
+    },
+    "sealing": {
+      "green_loss_ha": 564.9,
+      "mean_dndvi_new_sealed": -0.211,
+      "mean_dndbi_new_sealed": 0.047,
+      "szada": {
+        "green_loss_ha": 244.9,
+        "mean_dndvi_new_sealed": -0.221,
+        "mean_dndbi_new_sealed": 0.044
+      },
+      "veresegyhaz": {
+        "green_loss_ha": 320.0,
+        "mean_dndvi_new_sealed": -0.203,
+        "mean_dndbi_new_sealed": 0.049
+      }
+    },
+    "erosion": {
+      "high_spi_ha": 569.4,
+      "bare_soil_slope_ha": 585.0,
+      "spi_bsi_overlap_ha": 61.8,
+      "szada": {
+        "high_spi_ha": 218.7,
+        "bare_soil_slope_ha": 299.4,
+        "spi_bsi_overlap_ha": 36.0
+      },
+      "veresegyhaz": {
+        "high_spi_ha": 350.7,
+        "bare_soil_slope_ha": 285.6,
+        "spi_bsi_overlap_ha": 25.7
+      }
+    }
+  },
+  "sources": {
+    "s2_2018_scenes": 10,
+    "s2_2025_scenes": 10,
+    "landsat_scenes": 16
+  },
+  "overlay_bounds": [
+    [
+      47.596735,
+      19.224082
+    ],
+    [
+      47.683188,
+      19.386901
+    ]
+  ],
+  "lst_palette": {
+    "min_c": 29.9,
+    "max_c": 45.1
+  }
+}

@@ -1,0 +1,62 @@
+# Adatvédelem: nyers és feldolgozott téradatok (SOHA ne kerüljön gitbe / GitHubra!)
+/data/
+
+# Nyers GIS raszter-, vektor- és QGIS-fájlok
+*.zip
+*.qgz
+*.qgs
+*.qgd
+*.tif
+*.tiff
+*.dem
+*.img
+*.gdb/
+*.gpkg
+*.shp
+*.dbf
+*.shx
+*.prj
+*.cpg
+*.qmd
+*.sbn
+*.sbx
+*.ovr
+*.aux.xml
+*.tfw
+*.rrd
+
+# Irodai dokumentumok, jegyzetek és e-mail piszkozatok (csak lokálisan tartva)
+*.docx
+*.xlsx
+*.pdf
+*.txt
+!web/robots.txt
+
+# Belső projekt-szabályzatok, feldolgozó szkriptek és ügynök-konfigurációk
+GEMINI.md
+HANDOFF.md
+PROJEKT_TERV.md
+VIDEOKIVONAT_HEKTAR_MTT.md
+INDEX_KATALOGUS.md
+.agents/
+skills-lock.json
+scripts/
+pyproject.toml
+uv.lock
+
+# Python és fejlesztői környezet
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.pytest_cache/
+*.egg-info/
+
+# OS és szerkesztő fájlok
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.~lock.*
+*.~lock.*
